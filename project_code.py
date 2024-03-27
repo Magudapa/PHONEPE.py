@@ -1,22 +1,16 @@
-# phone pe project 
-
-# colab program 
-
-# cloning GITHUB 
-
-!git clone "https://github.com/PhonePe/pulse.git"
-
-# import files
-
 import pandas as pd
 import json
 import os
+import psycopg2
 
-# Aggregated Transaction
+# already the phonepe github clone is added to the file 
 
-path="/content/pulse/data/aggregated/transaction/country/india/state/"
+# AGGREGATED_TRANSACTION 
+
+path="D:/docs/PHONEPE/pulse/data/aggregated/transaction/country/india/state/"
 Agg_state_list = os.listdir(path)
 Agg_state_list
+
 
 col = {'State':[],'Year':[],'Quater':[],'Transaction_type':[],'Transaction_count':[],'Transaction_amount':[]}
 
@@ -44,13 +38,12 @@ for i in Agg_state_list:
 #Succesfully created a dataframe
 Agg_Trans=pd.DataFrame(col)
 
-Agg_Trans.to_csv("AGGREGATED_TRANSACTION")
+# AGGREGATED_USERS 
 
-# Aggregated user
-
-path="/content/pulse/data/aggregated/user/country/india/state/"
+path="D:/docs/PHONEPE/pulse/data/aggregated/user/country/india/state/"
 user_state_list = os.listdir(path)
 user_state_list
+
 
 col1 = {'State': [], 'Year': [], 'Quarter': [], 'Transaction_brand': [], 'Transaction_count': [], 'Transaction_percentage': []}
 
@@ -79,13 +72,12 @@ for i in user_state_list:
                 except Exception as e:
                     print(f"Error processing file {p_k}: {e}")
 
-Agg_user = pd.DataFrame(col1)  
+Agg_user = pd.DataFrame(col1)
 
-Agg_user.to_csv("AGGREGATED_USER")
 
-# MAP TRANSACTION
+# MAP_TRANSACTION 
 
-path="/content/pulse/data/map/transaction/hover/country/india/state/"
+path="D:/docs/PHONEPE/pulse/data/map/transaction/hover/country/india/state/"
 map_state_list = os.listdir(path)
 map_state_list
 
@@ -116,11 +108,10 @@ for i in map_state_list:
 
 map_Trans=pd.DataFrame(col2)
 
-map_Trans.to_csv("MAP_TRANSACTIONS")
 
-# MAP USERS
+#MAP_USERS 
 
-path="/content/pulse/data/map/user/hover/country/india/state/"
+path="D:/docs/PHONEPE/pulse/data/map/user/hover/country/india/state/"
 mapuser_state_list = os.listdir(path)
 mapuser_state_list
 
@@ -153,14 +144,12 @@ for i in mapuser_state_list:
 
 map_users = pd.DataFrame(col3)
 
-map_users.to_csv("MAP_USERS")
 
-# TOP TRANSACTION 
+# TOP_TRANSACTION 
 
-path="/content/pulse/data/top/transaction/country/india/state/"
+path="D:/docs/PHONEPE/pulse/data/top/transaction/country/india/state/"
 top_trans_state_list = os.listdir(path)
 top_trans_state_list
-
 
 col4 = {'State': [], 'Year': [], 'Quarter': [], 'Transaction_type': [], 'Transaction_district': [], 'Transaction_count': [], 'Transaction_amount': []}
 
@@ -192,12 +181,9 @@ for i in top_trans_state_list:
 top_trans = pd.DataFrame(col4)
 
 
-top_trans.to_csv("TOP_TRANSACTION")
+# TOP_USERS 
 
-
-#  TOP USERS
-
-path="/content/pulse/data/top/user/country/india/state/"
+path="D:/docs/PHONEPE/pulse/data/top/user/country/india/state/"
 top_users_state_list = os.listdir(path)
 top_users_state_list
 
@@ -224,9 +210,3 @@ for i in top_users_state_list:
 
 
 top_users = pd.DataFrame(col5)
-
-
-top_users.to_csv("TOP_USERS")
-
-
-

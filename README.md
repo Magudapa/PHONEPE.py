@@ -15,3 +15,5 @@ Than filtering the needed states data step by step  # step 4
 where to get the specific data from the cloned file need to use nested if function to get the specific data
 
 In this project we will get the view of getting specific data from the nested files 
+
+storing the data in the SQL with the help of python package (pandas)

@@ -3,14 +3,13 @@ import json
 import os
 import psycopg2
 
-# already the phonepe github clone is added to the file 
 
-# AGGREGATED_TRANSACTION 
+
+#Aggregated Transaction
 
 path="D:/docs/PHONEPE/pulse/data/aggregated/transaction/country/india/state/"
 Agg_state_list = os.listdir(path)
 Agg_state_list
-
 
 col = {'State':[],'Year':[],'Quater':[],'Transaction_type':[],'Transaction_count':[],'Transaction_amount':[]}
 
@@ -35,15 +34,24 @@ for i in Agg_state_list:
               col['State'].append(i)
               col['Year'].append(j)
               col['Quater'].append(int(k.strip('.json')))
+              
+              
 #Succesfully created a dataframe
-Agg_Trans=pd.DataFrame(col)
+Agg_Tran=pd.DataFrame(col)
+              
+            
+Agg_Tran['State']=Agg_Tran['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+Agg_Tran['State']=Agg_Tran['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+Agg_Tran['State']=Agg_Tran['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+Agg_Tran['State']=Agg_Tran['State'].str.replace("-"," ")
+Agg_Tran['State']=Agg_Tran['State'].str.title()
 
-# AGGREGATED_USERS 
+
+#Aggregated User
 
 path="D:/docs/PHONEPE/pulse/data/aggregated/user/country/india/state/"
 user_state_list = os.listdir(path)
 user_state_list
-
 
 col1 = {'State': [], 'Year': [], 'Quarter': [], 'Transaction_brand': [], 'Transaction_count': [], 'Transaction_percentage': []}
 
@@ -74,8 +82,13 @@ for i in user_state_list:
 
 Agg_user = pd.DataFrame(col1)
 
+Agg_user['State']=Agg_user['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+Agg_user['State']=Agg_user['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+Agg_user['State']=Agg_user['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+Agg_user['State']=Agg_user['State'].str.replace("-"," ")
+Agg_user['State']=Agg_user['State'].str.title()
 
-# MAP_TRANSACTION 
+#map transaction
 
 path="D:/docs/PHONEPE/pulse/data/map/transaction/hover/country/india/state/"
 map_state_list = os.listdir(path)
@@ -106,10 +119,16 @@ for i in map_state_list:
               col2['Year'].append(j)
               col2['Quarter'].append(int(k.strip('.json')))
 
-map_Trans=pd.DataFrame(col2)
+map_trans=pd.DataFrame(col2)
+
+map_trans['State']=map_trans['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+map_trans['State']=map_trans['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+map_trans['State']=map_trans['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+map_trans['State']=map_trans['State'].str.replace("-"," ")
+map_trans['State']=map_trans['State'].str.title()
 
 
-#MAP_USERS 
+# map user
 
 path="D:/docs/PHONEPE/pulse/data/map/user/hover/country/india/state/"
 mapuser_state_list = os.listdir(path)
@@ -144,8 +163,13 @@ for i in mapuser_state_list:
 
 map_users = pd.DataFrame(col3)
 
+map_users['State']=map_users['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+map_users['State']=map_users['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+map_users['State']=map_users['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+map_users['State']=map_users['State'].str.replace("-"," ")
+map_users['State']=map_users['State'].str.title()
 
-# TOP_TRANSACTION 
+# top transaction
 
 path="D:/docs/PHONEPE/pulse/data/top/transaction/country/india/state/"
 top_trans_state_list = os.listdir(path)
@@ -180,8 +204,14 @@ for i in top_trans_state_list:
 
 top_trans = pd.DataFrame(col4)
 
+top_trans['State']=top_trans['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+top_trans['State']=top_trans['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+top_trans['State']=top_trans['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+top_trans['State']=top_trans['State'].str.replace("-"," ")
+top_trans['State']=top_trans['State'].str.title()
 
-# TOP_USERS 
+
+# top user
 
 path="D:/docs/PHONEPE/pulse/data/top/user/country/india/state/"
 top_users_state_list = os.listdir(path)
@@ -209,4 +239,252 @@ for i in top_users_state_list:
               col5['Quarter'].append(int(k.strip('.json')))
 
 
-top_users = pd.DataFrame(col5)
+top_user = pd.DataFrame(col5)
+
+top_user['State']=top_user['State'].str.replace('andaman-&-nicobar-islands','andaman & nicobar')
+top_user['State']=top_user['State'].str.replace('jammu-&-kashmir', 'jammu & kashmir')
+top_user['State']=top_user['State'].str.replace('dadra-&-nagar-haveli-&-daman-&-diu','dadra and nagar haveli and daman and diu')
+top_user['State']=top_user['State'].str.replace("-"," ")
+top_user['State']=top_user['State'].str.title()
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_1 = """CREATE TABLE IF NOT EXISTS Agg_Tran (
+                        State VARCHAR(100),
+                        Year INT,
+                        Quater INT,
+                        Transaction_type VARCHAR(100),
+                        Transaction_count INT,
+                        Transaction_amount INT
+                    )"""
+
+
+# Create table for Agg_Tran
+                                                                       
+cursor.execute(create_query_1)
+conn.commit()           
+
+for index , row in Agg_Tran.iterrows():
+    insert_query = """INSERT INTO Agg_Tran (State,Year,Quater,Transaction_type,Transaction_count,Transaction_amount) VALUES (%s,%s,%s,%s,%s,%s)""" 
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quater"],
+                row["Transaction_type"],
+                row["Transaction_count"],
+                row["Transaction_amount"])
+                                                                                                                
+    try:
+        cursor.execute(insert_query, values)
+        conn.commit()
+    except Exception as e:
+        conn.rollback()  # Rollback changes if an exception occurs
+        print(f"Error inserting row {index}: {e}")
+
+# Close cursor and connection
+cursor.close()
+conn.close()
+
+# Create table for Agg_user
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_2 = """CREATE TABLE IF NOT EXISTS Agg_user(
+                        State VARCHAR(100),
+                        Year INT,
+                        Quarter INT,
+                        Transaction_brand VARCHAR(100),
+                        Transaction_count INT,
+                        Transaction_percentage float
+                    )"""
+                    
+cursor.execute(create_query_2)
+conn.commit()           
+
+for index , row in Agg_user.iterrows():
+    insert_query = """INSERT INTO Agg_user (State,Year,Quarter,Transaction_brand,Transaction_count,Transaction_percentage) 
+    VALUES (%s,%s,%s,%s,%s,%s)""" 
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quarter"],
+                row["Transaction_brand"],
+                row["Transaction_count"],
+                row["Transaction_percentage"])
+    
+data=Agg_user.values.tolist()
+cursor.executemany(insert_query,data)
+conn.commit()                                                      
+   
+# create table for map_trans
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_3 = """CREATE TABLE IF NOT EXISTS map_trans (
+                        State VARCHAR(100),
+                        Year INT,
+                        Quarter INT,
+                        Transaction_type VARCHAR(100),
+                        Transaction_district VARCHAR(100),
+                        Transaction_count BIGINT,
+                        Transaction_amount BIGINT
+                    )"""
+
+
+                    
+cursor.execute(create_query_3)
+conn.commit()           
+
+for index , row in map_trans.iterrows():
+    insert_query = """INSERT INTO map_trans (State,Year,Quarter,Transaction_type ,Transaction_district,
+                        Transaction_count ,
+                        Transaction_amount ) 
+    VALUES (%s,%s,%s,%s,%s,%s,%s)""" 
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quarter"],
+                row["Transaction_type"],
+                row["Transaction_district"],
+                row["Transaction_count"],
+                row["Transaction_amount"])
+    
+    try:
+        cursor.execute(insert_query, values)
+        conn.commit()
+    except Exception as e:
+        conn.rollback()  # Rollback changes if an exception occurs
+        print(f"Error inserting row {index}: {e}")
+
+# Close cursor and connection
+cursor.close()
+conn.close()    
+
+# create table for map_users
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_4 = """CREATE TABLE IF NOT EXISTS map_users (
+                        State VARCHAR(100),
+                        Year INT,
+                        Quarter INT,
+                        District VARCHAR(100),
+                        Registered_user BIGINT,
+                        App_opening BIGINT
+                    )"""
+
+                    
+cursor.execute(create_query_4)
+conn.commit()
+                    
+for index , row in map_users.iterrows():
+    insert_query = """INSERT INTO map_users (State,Year,Quarter,District,Registered_user,App_opening) 
+    VALUES (%s,%s,%s,%s,%s,%s)""" 
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quater"],
+                row["District"],
+                row["Registered_user"],
+                row["App_opening"])
+    
+data=map_users.values.tolist()
+cursor.executemany(insert_query,data)
+conn.commit()                 
+
+# create table for top_trans
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_5 = """CREATE TABLE IF NOT EXISTS top_trans (
+                        State VARCHAR(100),
+                        Year INT,
+                        Quarter INT,
+                        Transaction_type VARCHAR(100),
+                        Transaction_district VARCHAR(100),
+                        Transaction_count BIGINT,
+                        Transaction_amount BIGINT
+                    )"""
+                    
+cursor.execute(create_query_5)
+conn.commit()
+
+for index , row in top_trans.iterrows():
+    insert_query = """INSERT INTO top_trans (State,Year,Quarter,Transaction_type ,Transaction_district,
+                        Transaction_count ,
+                        Transaction_amount ) 
+    VALUES (%s,%s,%s,%s,%s,%s,%s)""" 
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quarter"],
+                row["Transaction_type"],
+                row["Transaction_district"],
+                row["Transaction_count"],
+                row["Transaction_amount"])
+    
+data=top_trans.values.tolist()
+cursor.executemany(insert_query,data)
+conn.commit()                    
+
+# Create table for top_user
+
+conn = psycopg2.connect(host="localhost",
+                        user="postgres",
+                        password="magu",
+                        database="phonepe",
+                        port="5432")
+cursor = conn.cursor()
+
+create_query_6 = """CREATE TABLE IF NOT EXISTS  top_users (
+                        State VARCHAR(100),
+                        Year INT,
+                        Quarter INT,
+                        registeredusers BIGINT,
+                        Transaction_district VARCHAR(100)
+                    )"""
+                    
+                    
+cursor.execute(create_query_6)
+conn.commit()
+
+for index , row in top_users.iterrows():
+    insert_query = """INSERT INTO top_users (State,Year,Quarter,registeredusers,Transaction_district)
+    VALUES (%s,%s,%s,%s,%s)"""
+    
+    values =(row["State"],
+                row["Year"],
+                row["Quarter"],
+                row["registeredusers"],
+                row["Transaction_district"])
+    
+data=top_users.values.tolist()
+cursor.executemany(insert_query,data)
+conn.commit()
+
+                 

@@ -877,7 +877,7 @@ elif select=="Data Exploration":
             col1,col2=st.columns(2)
             with col1:
                 
-                years=st.slider("select the year",agg_user_df["year"].min(),agg_user_df["year"].max(),agg_user_df["year"].min())
+                years=st.slider("select the year",agg_user_df["year"].min(),2021,agg_user_df["year"].min())
             user_year=agg_user_type(agg_user_df,years)
             
             
